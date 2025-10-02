@@ -47,7 +47,8 @@ metadata:
   namespace: distributed-ai
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
+  storageClassName: hostpath
   resources:
     requests:
       storage: 20Gi
