@@ -2,10 +2,10 @@
 # Place this repository under Rancher Fleet and point to the `fleet/` folder.
 # Fleet will apply all manifests in this folder to the target cluster.
 
-# Namespace in the Fleet management cluster where this bundle is registered
-namespace: fleet-local
+# Default namespace where resources will be created in the downstream cluster
+defaultNamespace: distributed-ai
 
-# Optional: limit deployment to the "blade" cluster. Remove this block to target all clusters.
+# Optional: limit deployment to the "blade" cluster
 targetCustomizations:
   - name: blade
     clusterName: blade
