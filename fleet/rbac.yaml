@@ -1,11 +1,4 @@
 apiVersion: v1
-kind: Namespace
-metadata:
-  name: distributed-ai
-  labels:
-    name: distributed-ai
----
-apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: distributed-ai-sa
