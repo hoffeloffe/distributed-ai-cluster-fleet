@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: distributed-ai-master
-  namespace: distributed-ai
 spec:
   replicas: 1
   selector:
@@ -56,7 +55,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: distributed-ai-worker
-  namespace: distributed-ai
 spec:
   replicas: 3
   selector:

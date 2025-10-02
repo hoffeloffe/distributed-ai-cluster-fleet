@@ -3,10 +3,7 @@
 # Fleet will apply all manifests in this folder to the target cluster.
 
 # Namespace in the Fleet management cluster where this bundle is registered
-namespace: fleet-default
-
-# Default namespace in the downstream cluster where resources will be installed
-defaultNamespace: distributed-ai
+namespace: fleet-local
 
 # Optional: limit deployment to the "blade" cluster. Remove this block to target all clusters.
 targetCustomizations:
