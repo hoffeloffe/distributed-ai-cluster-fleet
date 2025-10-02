@@ -19,7 +19,7 @@ spec:
       containers:
         - name: master
           image: hoffeloffe/distributed-ai-cluster:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           env:
             - name: NODE_ROLE
               value: "master"
@@ -73,7 +73,7 @@ spec:
       containers:
         - name: worker
           image: hoffeloffe/distributed-ai-cluster:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           env:
             - name: NODE_ROLE
               value: "worker"
