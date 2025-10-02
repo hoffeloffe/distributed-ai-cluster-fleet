@@ -39,16 +39,3 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
   name: distributed-ai-role
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: distributed-ai-models-v2
-  namespace: distributed-ai
-spec:
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: hostpath
-  resources:
-    requests:
-      storage: 20Gi

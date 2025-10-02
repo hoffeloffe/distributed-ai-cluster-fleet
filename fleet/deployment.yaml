@@ -50,8 +50,7 @@ spec:
               mountPath: /models
       volumes:
         - name: model-storage
-          persistentVolumeClaim:
-            claimName: distributed-ai-models-v2
+          emptyDir: {}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -105,5 +104,4 @@ spec:
               mountPath: /models
       volumes:
         - name: model-storage
-          persistentVolumeClaim:
-            claimName: distributed-ai-models-v2
+          emptyDir: {}
