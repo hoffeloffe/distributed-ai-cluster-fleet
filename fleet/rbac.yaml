@@ -1,0 +1,60 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: distributed-ai
+  labels:
+    name: distributed-ai
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: distributed-ai-sa
+  namespace: distributed-ai
+  labels:
+    app: distributed-ai
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: distributed-ai-role
+  namespace: distributed-ai
+rules:
+  - apiGroups: [""]
+    resources:
+      - pods
+      - services
+      - configmaps
+      - secrets
+      - persistentvolumeclaims
+    verbs: ["get", "list", "watch", "create", "update", "patch"]
+  - apiGroups: ["apps"]
+    resources:
+      - deployments
+      - replicasets
+    verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: distributed-ai-rolebinding
+  namespace: distributed-ai
+subjects:
+  - kind: ServiceAccount
+    name: distributed-ai-sa
+    namespace: distributed-ai
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: distributed-ai-role
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: distributed-ai-models
+  namespace: distributed-ai
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 20Gi
