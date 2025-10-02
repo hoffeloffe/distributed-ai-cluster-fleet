@@ -51,7 +51,7 @@ spec:
       volumes:
         - name: model-storage
           persistentVolumeClaim:
-            claimName: distributed-ai-models
+            claimName: distributed-ai-models-v2
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -106,4 +106,4 @@ spec:
       volumes:
         - name: model-storage
           persistentVolumeClaim:
-            claimName: distributed-ai-models
+            claimName: distributed-ai-models-v2

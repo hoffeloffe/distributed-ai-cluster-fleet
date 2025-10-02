@@ -43,7 +43,7 @@ roleRef:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: distributed-ai-models
+  name: distributed-ai-models-v2
   namespace: distributed-ai
 spec:
   accessModes:
