@@ -17,8 +17,10 @@ spec:
       serviceAccountName: distributed-ai-sa
       containers:
         - name: master
-          image: hoffeloffe/distributed-ai-cluster:latest
-          imagePullPolicy: Always
+          # Pinned by digest for reproducible, rollback-able deploys (corresponds to
+          # the image previously deployed as :latest). Update via CI when publishing.
+          image: hoffeloffe/distributed-ai-cluster@sha256:9da0d37d955bfcf7b00f3c842051754913045c365a0d2efff6f4b276402095d9
+          imagePullPolicy: IfNotPresent
           env:
             - name: NODE_ROLE
               value: "master"
@@ -44,6 +46,18 @@ spec:
             limits:
               cpu: "1000m"
               memory: "2Gi"
+          readinessProbe:
+            tcpSocket:
+              port: api
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            failureThreshold: 3
+          livenessProbe:
+            tcpSocket:
+              port: api
+            initialDelaySeconds: 30
+            periodSeconds: 20
+            failureThreshold: 3
           volumeMounts:
             - name: model-storage
               mountPath: /models
@@ -70,8 +84,10 @@ spec:
       serviceAccountName: distributed-ai-sa
       containers:
         - name: worker
-          image: hoffeloffe/distributed-ai-cluster:latest
-          imagePullPolicy: Always
+          # Pinned by digest for reproducible, rollback-able deploys (corresponds to
+          # the image previously deployed as :latest). Update via CI when publishing.
+          image: hoffeloffe/distributed-ai-cluster@sha256:9da0d37d955bfcf7b00f3c842051754913045c365a0d2efff6f4b276402095d9
+          imagePullPolicy: IfNotPresent
           env:
             - name: NODE_ROLE
               value: "worker"
@@ -97,6 +113,18 @@ spec:
             limits:
               cpu: "2000m"
               memory: "4Gi"
+          readinessProbe:
+            tcpSocket:
+              port: inference
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            failureThreshold: 3
+          livenessProbe:
+            tcpSocket:
+              port: inference
+            initialDelaySeconds: 30
+            periodSeconds: 20
+            failureThreshold: 3
           volumeMounts:
             - name: model-storage
               mountPath: /models
